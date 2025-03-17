@@ -1,37 +1,25 @@
-import React from "react";
-import '../index.css';
+import React, { useState } from 'react';
 
+function Reg({ setUser }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-function Reg () {
-    return(
-        <div className="form">
-            <div className="container">
-                <h1>Register</h1>
-                <input id="email" className="inp" type="text" placeholder="enter your email"></input><br></br>
-                <input id="password" className="inp" type="password" placeholder="create your password"></input><br></br>
-                <button className="btn">Register</button>
-                <button className="btn">Logout</button>
-                <button className="btn">Delete Account</button>
-            </div>
-        </div>
-    )
+  const handleReg = () => {
+    const userData = { name, email, password };
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser(userData);
+  };
+
+  return (
+    <div className='container'>
+      <h1>Register</h1>
+      <input className='inp' type="text" placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} /><br></br>
+      <input className='inp' type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} /><br></br>
+      <input className='inp' type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} /><br></br>
+      <button className='btn' onClick={handleReg}>Register</button>
+    </div>
+  );
 }
+
 export default Reg;
-
-
-
-// const BlogPost = ({title, content, Delete}) => {
-//     const handleLike = () => {
-//         setLikes(likes + 1)
-//     };
-
-//     return (
-//         <div className='blog-post'>
-//             <h2>{title}</h2>
-//             <p>{content}</p>
-//             <button onClick={handleLike}>Like {likes}</button>
-//             <button onClick={Delete}>Delete</button>
-
-//         </div>
-//     )
-// }
